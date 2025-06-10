@@ -122,10 +122,10 @@
   }
   
   .x402-card {
-    @apply bg-card border border-green-primary/20 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300;
+    @apply bg-card border border-primary/20 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300;
   }
   
   .x402-button {
-    @apply bg-green-primary hover:bg-green-primary/90 text-primary-foreground font-semibold px-6 py-3 rounded-lg transition-colors duration-200;
+    @apply bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 py-3 rounded-lg transition-colors duration-200;
   }
 }
