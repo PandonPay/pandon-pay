@@ -1,6 +1,11 @@
-
 import { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,16 +13,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { 
-  Code, 
-  Copy, 
-  Play, 
-  Terminal, 
-  Zap, 
+import {
+  Code,
+  Copy,
+  Play,
+  Terminal,
+  Zap,
   Check,
   ExternalLink,
   Book,
-  Cpu
+  Cpu,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -30,7 +35,7 @@ const DeveloperConsole = () => {
     navigator.clipboard.writeText(text);
     setCopied(label);
     setTimeout(() => setCopied(null), 2000);
-    
+
     toast({
       title: "代码已复制",
       description: `${label} 已复制到剪贴板`,
@@ -127,7 +132,7 @@ async function purchaseGPU() {
   });
   
   return resource;
-}`
+}`,
   };
 
   const quickStart = [
@@ -135,29 +140,27 @@ async function purchaseGPU() {
       step: "1",
       title: "安装 SDK",
       command: "npm install @pandon/x402-sdk",
-      description: "安装 Pandon Pay x402 SDK"
+      description: "安装 Pandon Pay x402 SDK",
     },
     {
-      step: "2", 
+      step: "2",
       title: "获取 API Key",
       command: "curl -X POST https://api.pandon.dev/auth/register",
-      description: "注册并获取您的 API 密钥"
+      description: "注册并获取您的 API 密钥",
     },
     {
       step: "3",
       title: "集成支付",
       command: "app.use(X402Middleware(config))",
-      description: "一行代码启用 x402 支付保护"
-    }
+      description: "一行代码启用 x402 支付保护",
+    },
   ];
 
   return (
     <div className="max-w-7xl mx-auto space-y-8">
       {/* Header */}
       <div className="text-center">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">
-          开发者控制台
-        </h2>
+        <h2 className="text-3xl font-bold text-gray-900 mb-4">开发者控制台</h2>
         <p className="text-lg text-gray-600 max-w-3xl mx-auto">
           体验 x402 协议的强大功能：HTTP 原生支付、AI 代理集成、一行代码部署
         </p>
@@ -199,9 +202,7 @@ async function purchaseGPU() {
             <Code className="w-5 h-5 mr-2" />
             代码示例
           </CardTitle>
-          <CardDescription>
-            真实的集成代码，直接复制使用
-          </CardDescription>
+          <CardDescription>真实的集成代码，直接复制使用</CardDescription>
         </CardHeader>
         <CardContent className="p-6">
           <Tabs defaultValue="server" className="w-full">
@@ -245,9 +246,7 @@ async function purchaseGPU() {
               <Terminal className="w-5 h-5 mr-2" />
               API 配置
             </CardTitle>
-            <CardDescription>
-              配置您的 x402 集成参数
-            </CardDescription>
+            <CardDescription>配置您的 x402 集成参数</CardDescription>
           </CardHeader>
           <CardContent className="p-6 space-y-4">
             <div className="space-y-2">
@@ -277,7 +276,9 @@ async function purchaseGPU() {
             <div className="space-y-3">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">测试网络:</span>
-                <Badge className="bg-orange-100 text-orange-700">Base Sepolia</Badge>
+                <Badge className="bg-orange-100 text-orange-700">
+                  Base Sepolia
+                </Badge>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">测试代币:</span>
@@ -297,9 +298,7 @@ async function purchaseGPU() {
               <Book className="w-5 h-5 mr-2" />
               开发资源
             </CardTitle>
-            <CardDescription>
-              文档、工具和社区支持
-            </CardDescription>
+            <CardDescription>文档、工具和社区支持</CardDescription>
           </CardHeader>
           <CardContent className="p-6 space-y-4">
             <div className="space-y-3">
@@ -310,7 +309,7 @@ async function purchaseGPU() {
                 </span>
                 <ExternalLink className="w-4 h-4" />
               </Button>
-              
+
               <Button variant="outline" className="w-full justify-between">
                 <span className="flex items-center">
                   <Code className="w-4 h-4 mr-2" />
@@ -318,7 +317,7 @@ async function purchaseGPU() {
                 </span>
                 <ExternalLink className="w-4 h-4" />
               </Button>
-              
+
               <Button variant="outline" className="w-full justify-between">
                 <span className="flex items-center">
                   <Zap className="w-4 h-4 mr-2" />
@@ -326,7 +325,7 @@ async function purchaseGPU() {
                 </span>
                 <ExternalLink className="w-4 h-4" />
               </Button>
-              
+
               <Button variant="outline" className="w-full justify-between">
                 <span className="flex items-center">
                   <Terminal className="w-4 h-4 mr-2" />
@@ -343,7 +342,10 @@ async function purchaseGPU() {
               <p className="text-sm text-green-700 mb-3">
                 我们的技术团队 24/7 在线，随时为您的集成提供支持
               </p>
-              <Button size="sm" className="bg-green-600 hover:bg-green-700 text-white">
+              <Button
+                size="sm"
+                className="bg-green-600 hover:bg-green-700 text-white"
+              >
                 联系技术支持
               </Button>
             </div>

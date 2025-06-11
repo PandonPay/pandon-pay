@@ -1,22 +1,28 @@
-
 import { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Navigation from "@/components/Navigation";
-import { 
-  Code, 
-  BookOpen, 
-  Zap, 
-  Copy, 
+import {
+  Code,
+  BookOpen,
+  Zap,
+  Copy,
   ExternalLink,
   CheckCircle,
   ArrowRight,
   Terminal,
   GitBranch,
-  Rocket
+  Rocket,
 } from "lucide-react";
+import { Footer } from "@/components/Footer";
 
 const Docs = () => {
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
@@ -74,13 +80,13 @@ app.post('/webhook/pandon', (req, res) => {
   }
   
   res.status(200).send('OK');
-});`
+});`,
   };
 
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
+
       <div className="container mx-auto px-4 py-8">
         {/* 页面标题 */}
         <div className="text-center mb-12">
@@ -91,7 +97,8 @@ app.post('/webhook/pandon', (req, res) => {
             <h1 className="text-4xl font-bold text-green-primary">开发文档</h1>
           </div>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            使用 Pandon Pay x402 协议，只需几行代码即可为您的应用添加稳定币支付功能
+            使用 Pandon Pay x402
+            协议，只需几行代码即可为您的应用添加稳定币支付功能
           </p>
         </div>
 
@@ -103,19 +110,31 @@ app.post('/webhook/pandon', (req, res) => {
                 <CardTitle className="text-lg">文档导航</CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
-                <Button variant="ghost" className="w-full justify-start text-sm">
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start text-sm"
+                >
                   <Rocket className="w-4 h-4 mr-2" />
                   快速开始
                 </Button>
-                <Button variant="ghost" className="w-full justify-start text-sm">
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start text-sm"
+                >
                   <Code className="w-4 h-4 mr-2" />
                   API 参考
                 </Button>
-                <Button variant="ghost" className="w-full justify-start text-sm">
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start text-sm"
+                >
                   <Terminal className="w-4 h-4 mr-2" />
                   SDK 指南
                 </Button>
-                <Button variant="ghost" className="w-full justify-start text-sm">
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start text-sm"
+                >
                   <GitBranch className="w-4 h-4 mr-2" />
                   示例项目
                 </Button>
@@ -143,9 +162,11 @@ app.post('/webhook/pandon', (req, res) => {
                       variant="ghost"
                       size="sm"
                       className="absolute top-2 right-2"
-                      onClick={() => copyToClipboard(quickStartCode, 'quickstart')}
+                      onClick={() =>
+                        copyToClipboard(quickStartCode, "quickstart")
+                      }
                     >
-                      {copiedCode === 'quickstart' ? (
+                      {copiedCode === "quickstart" ? (
                         <CheckCircle className="w-4 h-4" />
                       ) : (
                         <Copy className="w-4 h-4" />
@@ -216,9 +237,11 @@ app.post('/webhook/pandon', (req, res) => {
                         variant="ghost"
                         size="sm"
                         className="absolute top-2 right-2"
-                        onClick={() => copyToClipboard(apiExamples.createPayment, 'create')}
+                        onClick={() =>
+                          copyToClipboard(apiExamples.createPayment, "create")
+                        }
                       >
-                        {copiedCode === 'create' ? (
+                        {copiedCode === "create" ? (
                           <CheckCircle className="w-4 h-4" />
                         ) : (
                           <Copy className="w-4 h-4" />
@@ -236,9 +259,11 @@ app.post('/webhook/pandon', (req, res) => {
                         variant="ghost"
                         size="sm"
                         className="absolute top-2 right-2"
-                        onClick={() => copyToClipboard(apiExamples.handlePayment, 'handle')}
+                        onClick={() =>
+                          copyToClipboard(apiExamples.handlePayment, "handle")
+                        }
                       >
-                        {copiedCode === 'handle' ? (
+                        {copiedCode === "handle" ? (
                           <CheckCircle className="w-4 h-4" />
                         ) : (
                           <Copy className="w-4 h-4" />
@@ -256,9 +281,11 @@ app.post('/webhook/pandon', (req, res) => {
                         variant="ghost"
                         size="sm"
                         className="absolute top-2 right-2"
-                        onClick={() => copyToClipboard(apiExamples.webhook, 'webhook')}
+                        onClick={() =>
+                          copyToClipboard(apiExamples.webhook, "webhook")
+                        }
                       >
-                        {copiedCode === 'webhook' ? (
+                        {copiedCode === "webhook" ? (
                           <CheckCircle className="w-4 h-4" />
                         ) : (
                           <Copy className="w-4 h-4" />
@@ -320,9 +347,7 @@ app.post('/webhook/pandon', (req, res) => {
               <Card className="x402-card">
                 <CardHeader>
                   <CardTitle className="text-lg">示例项目</CardTitle>
-                  <CardDescription>
-                    查看完整的集成示例
-                  </CardDescription>
+                  <CardDescription>查看完整的集成示例</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Button className="x402-button w-full">
@@ -336,9 +361,7 @@ app.post('/webhook/pandon', (req, res) => {
               <Card className="x402-card">
                 <CardHeader>
                   <CardTitle className="text-lg">开发者社区</CardTitle>
-                  <CardDescription>
-                    加入我们的开发者社区
-                  </CardDescription>
+                  <CardDescription>加入我们的开发者社区</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Button variant="outline" className="w-full">
@@ -351,6 +374,8 @@ app.post('/webhook/pandon', (req, res) => {
           </div>
         </div>
       </div>
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

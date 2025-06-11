@@ -1,27 +1,40 @@
 import { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { 
-  CreditCard, 
-  Copy, 
-  QrCode, 
-  ExternalLink, 
-  Clock, 
-  DollarSign, 
+import {
+  CreditCard,
+  Copy,
+  QrCode,
+  ExternalLink,
+  Clock,
+  DollarSign,
   Shield,
   Zap,
   Check,
-  Link as LinkIcon
+  Link as LinkIcon,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useWallet } from "@/hooks/useWallet";
 import Navigation from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
 
 const CreatePayment = () => {
   const { address } = useWallet();
@@ -66,14 +79,14 @@ const CreatePayment = () => {
     }
 
     setIsGenerating(true);
-    
+
     // Simulate API call
     setTimeout(() => {
       const linkId = Math.random().toString(36).substring(2, 15);
       const link = `https://pay.pandon.dev/x402/${linkId}`;
       setGeneratedLink(link);
       setIsGenerating(false);
-      
+
       toast({
         title: "支付链接已生成",
         description: "您的 x402 支付链接已准备就绪！",
@@ -85,19 +98,20 @@ const CreatePayment = () => {
     navigator.clipboard.writeText(generatedLink);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
-    
+
     toast({
       title: "链接已复制",
       description: "支付链接已复制到剪贴板",
     });
   };
 
-  const estimatedFee = networks.find(n => n.value === network)?.fee || "0.001 USDC";
+  const estimatedFee =
+    networks.find((n) => n.value === network)?.fee || "0.001 USDC";
 
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
+
       <div className="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h1 className="text-3xl font-bold text-foreground mb-4">
@@ -116,9 +130,7 @@ const CreatePayment = () => {
                 <CreditCard className="w-5 h-5 mr-2" />
                 支付配置
               </CardTitle>
-              <CardDescription>
-                设置您的 x402 支付参数
-              </CardDescription>
+              <CardDescription>设置您的 x402 支付参数</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               {/* Amount */}
@@ -242,7 +254,7 @@ const CreatePayment = () => {
               </Alert>
 
               {/* Generate Button */}
-              <Button 
+              <Button
                 onClick={handleGenerateLink}
                 disabled={isGenerating || !address}
                 className="x402-button w-full"
@@ -253,9 +265,7 @@ const CreatePayment = () => {
                     生成中...
                   </>
                 ) : !address ? (
-                  <>
-                    请先连接钱包
-                  </>
+                  <>请先连接钱包</>
                 ) : (
                   <>
                     <LinkIcon className="w-4 h-4 mr-2" />
@@ -273,9 +283,7 @@ const CreatePayment = () => {
                 <LinkIcon className="w-5 h-5 mr-2" />
                 生成的支付链接
               </CardTitle>
-              <CardDescription>
-                分享这个链接以接收 x402 支付
-              </CardDescription>
+              <CardDescription>分享这个链接以接收 x402 支付</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               {generatedLink ? (
@@ -309,11 +317,15 @@ const CreatePayment = () => {
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
                         <span>金额:</span>
-                        <span className="font-medium">{amount} {currency}</span>
+                        <span className="font-medium">
+                          {amount} {currency}
+                        </span>
                       </div>
                       <div className="flex justify-between">
                         <span>网络:</span>
-                        <span>{networks.find(n => n.value === network)?.label}</span>
+                        <span>
+                          {networks.find((n) => n.value === network)?.label}
+                        </span>
                       </div>
                       <div className="flex justify-between">
                         <span>接收地址:</span>
@@ -353,7 +365,9 @@ const CreatePayment = () => {
                     准备生成支付链接
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    {!address ? "请先连接钱包，然后填写左侧表单" : "填写左侧表单并点击生成按钮"}
+                    {!address
+                      ? "请先连接钱包，然后填写左侧表单"
+                      : "填写左侧表单并点击生成按钮"}
                   </p>
                 </div>
               )}
@@ -361,6 +375,8 @@ const CreatePayment = () => {
           </Card>
         </div>
       </div>
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

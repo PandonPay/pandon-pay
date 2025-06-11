@@ -1,24 +1,36 @@
 import { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { 
-  BarChart3, 
-  TrendingUp, 
-  DollarSign, 
-  Users, 
-  Clock, 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  BarChart3,
+  TrendingUp,
+  DollarSign,
+  Users,
+  Clock,
   Zap,
   Code,
   ExternalLink,
   Activity,
   Plus,
   Eye,
-  Copy
+  Copy,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
@@ -26,6 +38,7 @@ import { useWallet } from "@/hooks/useWallet";
 import Navigation from "@/components/Navigation";
 import DeveloperConsole from "@/components/DeveloperConsole";
 import StatsSection from "@/components/StatsSection";
+import { Footer } from "@/components/Footer";
 
 const Dashboard = () => {
   const { address, balance } = useWallet();
@@ -41,18 +54,18 @@ const Dashboard = () => {
       description: "API 访问许可证",
       link: "https://pay.pandon.dev/x402/abc123",
       status: "active",
-      created: "2小时前"
+      created: "2小时前",
     },
     {
       id: "link_2",
-      amount: "10.50 USDC", 
+      amount: "10.50 USDC",
       description: "Premium 订阅",
       link: "https://pay.pandon.dev/x402/def456",
       status: "active",
-      created: "1天前"
-    }
+      created: "1天前",
+    },
   ]);
-  
+
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -64,7 +77,7 @@ const Dashboard = () => {
       icon: DollarSign,
       color: "text-green-600",
       bgColor: "bg-green-100",
-      description: "当前钱包余额"
+      description: "当前钱包余额",
     },
     {
       title: "总交易额",
@@ -73,16 +86,24 @@ const Dashboard = () => {
       icon: TrendingUp,
       color: "text-blue-600",
       bgColor: "bg-blue-100",
-      description: "累计支付收入"
+      description: "累计支付收入",
     },
     {
       title: "成功支付",
       value: "234",
       change: "+12.5%",
+      icon: TrendingUp,
+      color: "text-blue-600",
+      bgColor: "bg-blue-100",
+    },
+    {
+      title: "活跃用户",
+      value: "89",
+      change: "+8.1%",
       icon: Users,
       color: "text-purple-600",
       bgColor: "bg-purple-100",
-      description: "成功交易次数"
+      description: "成功交易次数",
     },
     {
       title: "平均确认时间",
@@ -91,8 +112,8 @@ const Dashboard = () => {
       icon: Clock,
       color: "text-orange-600",
       bgColor: "bg-orange-100",
-      description: "交易确认速度"
-    }
+      description: "交易确认速度",
+    },
   ];
 
   const recentTransactions = [
@@ -102,15 +123,15 @@ const Dashboard = () => {
       status: "成功",
       time: "2分钟前",
       network: "Base",
-      hash: "0x1a2b...4c5d"
+      hash: "0x1a2b...4c5d",
     },
     {
-      id: "tx_2", 
+      id: "tx_2",
       amount: "10.50 USDC",
       status: "成功",
       time: "15分钟前",
       network: "Polygon",
-      hash: "0x6e7f...8g9h"
+      hash: "0x6e7f...8g9h",
     },
     {
       id: "tx_3",
@@ -118,8 +139,8 @@ const Dashboard = () => {
       status: "处理中",
       time: "1小时前",
       network: "Base",
-      hash: "0xabcd...efgh"
-    }
+      hash: "0xabcd...efgh",
+    },
   ];
 
   const handleCreatePayment = () => {
@@ -138,13 +159,13 @@ const Dashboard = () => {
       description: description || "支付链接",
       link: `https://pay.pandon.dev/x402/${Math.random().toString(36).substring(2, 15)}`,
       status: "active",
-      created: "刚刚"
+      created: "刚刚",
     };
 
     setPaymentLinks([newLink, ...paymentLinks]);
     setAmount("");
     setDescription("");
-    
+
     toast({
       title: "支付链接已创建",
       description: "您的 x402 支付链接已准备就绪！",
@@ -166,19 +187,20 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
+
       <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-foreground mb-4">
-            支付控制台
-          </h1>
+          <h1 className="text-3xl font-bold text-foreground mb-4">控制台</h1>
           <div className="flex items-center space-x-4">
             <p className="text-lg text-muted-foreground">
               管理您的 x402 支付集成和监控交易数据
             </p>
             {address && (
-              <Badge variant="outline" className="bg-green-primary/10 text-green-primary border-green-primary/30">
+              <Badge
+                variant="outline"
+                className="bg-green-primary/10 text-green-primary border-green-primary/30"
+              >
                 钱包: {address.slice(0, 6)}...{address.slice(-4)}
               </Badge>
             )}
@@ -207,7 +229,9 @@ const Dashboard = () => {
                         {metric.description}
                       </p>
                     </div>
-                    <div className={`w-12 h-12 ${metric.bgColor} rounded-lg flex items-center justify-center`}>
+                    <div
+                      className={`w-12 h-12 ${metric.bgColor} rounded-lg flex items-center justify-center`}
+                    >
                       <Icon className={`w-6 h-6 ${metric.color}`} />
                     </div>
                   </div>
@@ -219,17 +243,19 @@ const Dashboard = () => {
 
         {/* Tabs */}
         <Tabs defaultValue="overview" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5">
+          <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="overview">概览</TabsTrigger>
             <TabsTrigger value="create">创建支付</TabsTrigger>
             <TabsTrigger value="payments">支付链接</TabsTrigger>
             <TabsTrigger value="transactions">交易记录</TabsTrigger>
             <TabsTrigger value="developer">开发工具</TabsTrigger>
+            <TabsTrigger value="analytics">数据分析</TabsTrigger>
           </TabsList>
 
           {/* Overview Tab */}
           <TabsContent value="overview" className="space-y-6">
             <div className="grid lg:grid-cols-2 gap-6">
+              {/* Quick Actions */}
               <Card className="x402-card">
                 <CardHeader>
                   <CardTitle className="flex items-center text-green-primary">
@@ -253,6 +279,7 @@ const Dashboard = () => {
                 </CardContent>
               </Card>
 
+              {/* System Status */}
               <Card className="x402-card">
                 <CardHeader>
                   <CardTitle className="flex items-center text-green-primary">
@@ -281,6 +308,7 @@ const Dashboard = () => {
               </Card>
             </div>
 
+            {/* Stats Section */}
             <Card className="x402-card">
               <CardHeader>
                 <CardTitle>平台统计</CardTitle>
@@ -290,7 +318,6 @@ const Dashboard = () => {
               </CardContent>
             </Card>
           </TabsContent>
-
           {/* Create Payment Tab */}
           <TabsContent value="create" className="space-y-6">
             <Card className="x402-card">
@@ -299,9 +326,7 @@ const Dashboard = () => {
                   <Plus className="w-5 h-5 mr-2" />
                   创建支付链接
                 </CardTitle>
-                <CardDescription>
-                  生成基于 x402 协议的支付链接
-                </CardDescription>
+                <CardDescription>生成基于 x402 协议的支付链接</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
@@ -321,14 +346,27 @@ const Dashboard = () => {
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
+                    </Select>
+                  </div>
+                </div>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label>链接有效期</Label>
+                    <Select>
+                      <SelectTrigger>
+                        <SelectValue placeholder="选择有效期" />
+                      </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="USDC">USDC</SelectItem>
-                        <SelectItem value="USDT">USDT</SelectItem>
+                        <SelectItem value="1h">1小时</SelectItem>
+                        <SelectItem value="24h">24小时</SelectItem>
+                        <SelectItem value="7d">7天</SelectItem>
+                        <SelectItem value="30d">30天</SelectItem>
+                        <SelectItem value="never">永久有效</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                 </div>
-                
+
                 <div className="space-y-2">
                   <Label>区块链网络</Label>
                   <Select value={network} onValueChange={setNetwork}>
@@ -366,7 +404,10 @@ const Dashboard = () => {
                   </p>
                 </div>
 
-                <Button onClick={handleCreatePayment} className="x402-button w-full">
+                <Button
+                  onClick={handleCreatePayment}
+                  className="x402-button w-full"
+                >
                   <Plus className="w-4 h-4 mr-2" />
                   生成支付链接
                 </Button>
@@ -379,32 +420,45 @@ const Dashboard = () => {
             <Card className="x402-card">
               <CardHeader>
                 <CardTitle>我的支付链接</CardTitle>
-                <CardDescription>
-                  管理您创建的所有支付链接
-                </CardDescription>
+                <CardDescription>管理您创建的所有支付链接</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   {paymentLinks.map((link) => (
-                    <div key={link.id} className="flex items-center justify-between p-4 border border-green-primary/20 rounded-lg">
+                    <div
+                      key={link.id}
+                      className="flex items-center justify-between p-4 border border-green-primary/20 rounded-lg"
+                    >
                       <div className="flex items-center space-x-4">
                         <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
                           <DollarSign className="w-5 h-5 text-green-600" />
                         </div>
                         <div>
                           <p className="font-medium">{link.amount}</p>
-                          <p className="text-sm text-muted-foreground">{link.description}</p>
-                          <p className="text-xs text-muted-foreground">创建于 {link.created}</p>
+                          <p className="text-sm text-muted-foreground">
+                            {link.description}
+                          </p>
+                          <p className="text-xs text-muted-foreground">
+                            创建于 {link.created}
+                          </p>
                         </div>
                       </div>
                       <div className="flex items-center space-x-2">
                         <Badge className="bg-green-600 text-white">
                           {link.status === "active" ? "活跃" : "已过期"}
                         </Badge>
-                        <Button variant="outline" size="sm" onClick={() => copyToClipboard(link.link)}>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => copyToClipboard(link.link)}
+                        >
                           <Copy className="w-3 h-3" />
                         </Button>
-                        <Button variant="outline" size="sm" onClick={() => viewPaymentDetails(link.id)}>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => viewPaymentDetails(link.id)}
+                        >
                           <Eye className="w-3 h-3" />
                         </Button>
                       </div>
@@ -420,32 +474,43 @@ const Dashboard = () => {
             <Card className="x402-card">
               <CardHeader>
                 <CardTitle>最近交易</CardTitle>
-                <CardDescription>
-                  您最近的 x402 支付交易记录
-                </CardDescription>
+                <CardDescription>您最近的 x402 支付交易记录</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   {recentTransactions.map((tx) => (
-                    <div key={tx.id} className="flex items-center justify-between p-4 border border-green-primary/20 rounded-lg">
+                    <div
+                      key={tx.id}
+                      className="flex items-center justify-between p-4 border border-green-primary/20 rounded-lg"
+                    >
                       <div className="flex items-center space-x-4">
                         <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
                           <DollarSign className="w-5 h-5 text-green-600" />
                         </div>
                         <div>
                           <p className="font-medium">{tx.amount}</p>
-                          <p className="text-sm text-muted-foreground">{tx.time}</p>
+                          <p className="text-sm text-muted-foreground">
+                            {tx.time}
+                          </p>
                         </div>
                       </div>
                       <div className="text-right space-y-1">
                         <div className="flex items-center space-x-2">
-                          <Badge className={tx.status === "成功" ? "bg-green-600 text-white" : "bg-yellow-500 text-white"}>
+                          <Badge
+                            className={
+                              tx.status === "成功"
+                                ? "bg-green-600 text-white"
+                                : "bg-yellow-500 text-white"
+                            }
+                          >
                             {tx.status}
                           </Badge>
                           <Badge variant="outline">{tx.network}</Badge>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <code className="text-xs text-muted-foreground">{tx.hash}</code>
+                          <code className="text-xs text-muted-foreground">
+                            {tx.hash}
+                          </code>
                           <Button variant="ghost" size="sm">
                             <ExternalLink className="w-3 h-3" />
                           </Button>
@@ -462,8 +527,33 @@ const Dashboard = () => {
           <TabsContent value="developer" className="space-y-6">
             <DeveloperConsole />
           </TabsContent>
+
+          {/* Analytics Tab */}
+          <TabsContent value="analytics" className="space-y-6">
+            <Card className="x402-card">
+              <CardHeader>
+                <CardTitle>数据分析</CardTitle>
+                <CardDescription>
+                  深入了解您的支付数据和用户行为
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="text-center py-12">
+                  <BarChart3 className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+                  <h3 className="text-lg font-medium text-muted-foreground mb-2">
+                    分析功能即将推出
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    我们正在开发强大的分析工具来帮助您更好地理解支付数据
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
         </Tabs>
       </div>
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

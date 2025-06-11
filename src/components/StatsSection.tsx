@@ -1,4 +1,3 @@
-
 import { TrendingUp, Users, Zap, Globe } from "lucide-react";
 
 const StatsSection = () => {
@@ -7,26 +6,26 @@ const StatsSection = () => {
       icon: TrendingUp,
       value: "$2.4M+",
       label: "已处理交易额",
-      description: "累计稳定币支付金额"
+      description: "累计稳定币支付金额",
     },
     {
       icon: Users,
       value: "1,200+",
       label: "活跃开发者",
-      description: "正在使用 x402 SDK"
+      description: "正在使用 x402 SDK",
     },
     {
       icon: Zap,
       value: "2.8s",
       label: "平均确认时间",
-      description: "链上支付验证速度"
+      description: "链上支付验证速度",
     },
     {
       icon: Globe,
       value: "45+",
       label: "支持国家",
-      description: "全球覆盖范围"
-    }
+      description: "全球覆盖范围",
+    },
   ];
 
   return (
@@ -44,9 +43,7 @@ const StatsSection = () => {
             <div className="text-sm font-semibold text-gray-700 mb-1">
               {stat.label}
             </div>
-            <div className="text-xs text-gray-500">
-              {stat.description}
-            </div>
+            <div className="text-xs text-gray-500">{stat.description}</div>
           </div>
         );
       })}

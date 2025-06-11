@@ -1,60 +1,70 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Navigation from "@/components/Navigation";
-import { 
-  Wallet, 
-  CheckCircle, 
-  Clock, 
-  AlertCircle, 
-  Copy, 
+import {
+  Wallet,
+  CheckCircle,
+  Clock,
+  AlertCircle,
+  Copy,
   QrCode,
   ArrowRight,
-  Zap
+  Zap,
 } from "lucide-react";
+import { Footer } from "@/components/Footer";
 
 const ReceivePayment = () => {
-  const [paymentStatus, setPaymentStatus] = useState<'pending' | 'processing' | 'completed' | 'failed'>('pending');
+  const [paymentStatus, setPaymentStatus] = useState<
+    "pending" | "processing" | "completed" | "failed"
+  >("pending");
   const [walletConnected, setWalletConnected] = useState(false);
   const [paymentAmount] = useState("10.50");
   const [currency] = useState("USDC");
 
   const handleConnectWallet = () => {
     setWalletConnected(true);
-    setPaymentStatus('processing');
+    setPaymentStatus("processing");
     // 模拟支付处理
     setTimeout(() => {
-      setPaymentStatus('completed');
+      setPaymentStatus("completed");
     }, 3000);
   };
 
   const getStatusIcon = () => {
     switch (paymentStatus) {
-      case 'pending':
+      case "pending":
         return <Clock className="w-6 h-6 text-muted-foreground" />;
-      case 'processing':
-        return <div className="w-6 h-6 animate-spin border-2 border-primary border-t-transparent rounded-full" />;
-      case 'completed':
+      case "processing":
+        return (
+          <div className="w-6 h-6 animate-spin border-2 border-primary border-t-transparent rounded-full" />
+        );
+      case "completed":
         return <CheckCircle className="w-6 h-6 text-primary" />;
-      case 'failed':
+      case "failed":
         return <AlertCircle className="w-6 h-6 text-destructive" />;
     }
   };
 
   const getStatusText = () => {
     switch (paymentStatus) {
-      case 'pending':
-        return '等待支付';
-      case 'processing':
-        return '处理中...';
-      case 'completed':
-        return '支付成功';
-      case 'failed':
-        return '支付失败';
+      case "pending":
+        return "等待支付";
+      case "processing":
+        return "处理中...";
+      case "completed":
+        return "支付成功";
+      case "failed":
+        return "支付失败";
     }
   };
 
@@ -64,7 +74,7 @@ const ReceivePayment = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
+
       <div className="container mx-auto px-4 py-8 max-w-2xl">
         {/* 页面标题 */}
         <div className="text-center mb-8">
@@ -88,9 +98,7 @@ const ReceivePayment = () => {
                 x402 协议
               </Badge>
             </CardTitle>
-            <CardDescription>
-              请确认支付信息并连接钱包完成交易
-            </CardDescription>
+            <CardDescription>请确认支付信息并连接钱包完成交易</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-center justify-between py-4 border-b">
@@ -99,11 +107,11 @@ const ReceivePayment = () => {
                 {paymentAmount} {currency}
               </span>
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="payment-link">支付链接</Label>
               <div className="flex items-center space-x-2">
-                <Input 
+                <Input
                   id="payment-link"
                   value={mockPaymentLink}
                   readOnly
@@ -129,12 +137,12 @@ const ReceivePayment = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            {paymentStatus === 'pending' && (
+            {paymentStatus === "pending" && (
               <div className="space-y-4">
                 <p className="text-muted-foreground">
                   请连接您的钱包以开始支付流程
                 </p>
-                <Button 
+                <Button
                   onClick={handleConnectWallet}
                   className="x402-button w-full"
                   disabled={walletConnected}
@@ -145,7 +153,7 @@ const ReceivePayment = () => {
               </div>
             )}
 
-            {paymentStatus === 'processing' && (
+            {paymentStatus === "processing" && (
               <div className="space-y-4">
                 <p className="text-muted-foreground">
                   正在处理您的支付，请稍候...
@@ -159,7 +167,7 @@ const ReceivePayment = () => {
               </div>
             )}
 
-            {paymentStatus === 'completed' && (
+            {paymentStatus === "completed" && (
               <div className="space-y-4">
                 <p className="text-green-primary font-medium">
                   支付已成功完成！
@@ -192,7 +200,7 @@ const ReceivePayment = () => {
               基于 Layer2 的快速结算
             </p>
           </Card>
-          
+
           <Card className="text-center p-4">
             <CheckCircle className="w-8 h-8 text-primary mx-auto mb-2" />
             <h3 className="font-semibold mb-1">安全可靠</h3>
@@ -200,16 +208,16 @@ const ReceivePayment = () => {
               智能合约保障资金安全
             </p>
           </Card>
-          
+
           <Card className="text-center p-4">
             <Wallet className="w-8 h-8 text-primary mx-auto mb-2" />
             <h3 className="font-semibold mb-1">低手续费</h3>
-            <p className="text-sm text-muted-foreground">
-              优化的 gas 费用结构
-            </p>
+            <p className="text-sm text-muted-foreground">优化的 gas 费用结构</p>
           </Card>
         </div>
       </div>
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };
