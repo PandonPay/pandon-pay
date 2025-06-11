@@ -2,12 +2,20 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link, useNavigate } from "react-router-dom";
-import { Wallet, LogOut } from "lucide-react";
+import { Wallet, LogOut, BarChart3, Settings } from "lucide-react";
 import { useWallet } from "@/hooks/useWallet";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Navigation = () => {
   const navigate = useNavigate();
-  const { isConnected, address, disconnectWallet } = useWallet();
+  const { isConnected, address, balance, connectWallet, disconnectWallet, isConnecting } = useWallet();
 
   const handleDisconnect = () => {
     disconnectWallet();
@@ -45,23 +53,77 @@ const Navigation = () => {
 
           <div className="flex items-center space-x-4">
             {isConnected ? (
-              <div className="flex items-center space-x-3">
-                <Badge variant="outline" className="bg-green-primary/10 text-green-primary border-green-primary/30">
-                  <Wallet className="w-3 h-3 mr-1" />
-                  {address?.slice(0, 6)}...{address?.slice(-4)}
-                </Badge>
-                <Button variant="outline" size="sm" onClick={handleDisconnect}>
-                  <LogOut className="w-4 h-4 mr-1" />
-                  断开
-                </Button>
-              </div>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" className="bg-green-primary/10 border-green-primary/30 hover:bg-green-primary/20">
+                    <Wallet className="w-4 h-4 mr-2" />
+                    <div className="flex flex-col text-left">
+                      <span className="text-xs text-green-primary font-medium">
+                        {address?.slice(0, 6)}...{address?.slice(-4)}
+                      </span>
+                      <span className="text-xs text-muted-foreground">
+                        {balance} ETH
+                      </span>
+                    </div>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56 bg-background border border-green-primary/20">
+                  <DropdownMenuLabel className="text-green-primary">钱包信息</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  
+                  <div className="px-2 py-2">
+                    <div className="space-y-1">
+                      <p className="text-sm font-medium">地址</p>
+                      <p className="text-xs text-muted-foreground font-mono">
+                        {address}
+                      </p>
+                    </div>
+                    <div className="mt-2">
+                      <p className="text-sm font-medium">余额</p>
+                      <p className="text-xs text-muted-foreground">
+                        {balance} ETH
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <DropdownMenuSeparator />
+                  
+                  <DropdownMenuItem onClick={() => navigate("/dashboard")} className="cursor-pointer">
+                    <BarChart3 className="w-4 h-4 mr-2" />
+                    进入 Dashboard
+                  </DropdownMenuItem>
+                  
+                  <DropdownMenuItem onClick={() => navigate("/create")} className="cursor-pointer">
+                    <Wallet className="w-4 h-4 mr-2" />
+                    创建支付
+                  </DropdownMenuItem>
+                  
+                  <DropdownMenuSeparator />
+                  
+                  <DropdownMenuItem onClick={handleDisconnect} className="cursor-pointer text-red-600">
+                    <LogOut className="w-4 h-4 mr-2" />
+                    断开连接
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             ) : (
-              <Link to="/">
-                <Button variant="outline">
-                  <Wallet className="w-4 h-4 mr-2" />
-                  连接钱包
-                </Button>
-              </Link>
+              <Button 
+                variant="outline"
+                onClick={connectWallet}
+                disabled={isConnecting}
+              >
+                {isConnecting ? (
+                  <>
+                    <div className="w-4 h-4 mr-2 animate-spin border-2 border-current border-t-transparent rounded-full" />
+                    连接中...
+                  </>
+                ) : (
+                  <>
+                    <Wallet className="w-4 h-4 mr-2" />
+                    连接钱包
+                  </>
+                )}
+              </Button>
             )}
           </div>
         </div>

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -21,9 +20,11 @@ import {
   Link as LinkIcon
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useWallet } from "@/hooks/useWallet";
 import Navigation from "@/components/Navigation";
 
 const CreatePayment = () => {
+  const { address } = useWallet();
   const [amount, setAmount] = useState("");
   const [currency, setCurrency] = useState("USDC");
   const [network, setNetwork] = useState("base");
@@ -50,6 +51,15 @@ const CreatePayment = () => {
       toast({
         title: "请填写必填字段",
         description: "金额、货币和网络都是必需的",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!address) {
+      toast({
+        title: "请先连接钱包",
+        description: "需要连接钱包来生成支付链接",
         variant: "destructive",
       });
       return;
@@ -174,6 +184,20 @@ const CreatePayment = () => {
                 </Select>
               </div>
 
+              {/* Receive Address */}
+              <div className="space-y-2">
+                <Label>接收地址 *</Label>
+                <Input
+                  value={address || ""}
+                  disabled
+                  className="bg-muted text-muted-foreground font-mono text-sm"
+                  placeholder="请先连接钱包"
+                />
+                <p className="text-xs text-muted-foreground">
+                  支付将发送到您连接的钱包地址，此地址不可修改
+                </p>
+              </div>
+
               {/* Description */}
               <div className="space-y-2">
                 <Label htmlFor="description">
@@ -220,13 +244,17 @@ const CreatePayment = () => {
               {/* Generate Button */}
               <Button 
                 onClick={handleGenerateLink}
-                disabled={isGenerating}
+                disabled={isGenerating || !address}
                 className="x402-button w-full"
               >
                 {isGenerating ? (
                   <>
                     <Zap className="w-4 h-4 mr-2 animate-spin" />
                     生成中...
+                  </>
+                ) : !address ? (
+                  <>
+                    请先连接钱包
                   </>
                 ) : (
                   <>
@@ -288,6 +316,12 @@ const CreatePayment = () => {
                         <span>{networks.find(n => n.value === network)?.label}</span>
                       </div>
                       <div className="flex justify-between">
+                        <span>接收地址:</span>
+                        <span className="text-right font-mono text-xs">
+                          {address?.slice(0, 6)}...{address?.slice(-4)}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
                         <span>有效期:</span>
                         <span>{expiryDays} 天</span>
                       </div>
@@ -319,7 +353,7 @@ const CreatePayment = () => {
                     准备生成支付链接
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    填写左侧表单并点击生成按钮
+                    {!address ? "请先连接钱包，然后填写左侧表单" : "填写左侧表单并点击生成按钮"}
                   </p>
                 </div>
               )}

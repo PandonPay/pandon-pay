@@ -22,11 +22,13 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { useWallet } from "@/hooks/useWallet";
 import Navigation from "@/components/Navigation";
 import DeveloperConsole from "@/components/DeveloperConsole";
 import StatsSection from "@/components/StatsSection";
 
 const Dashboard = () => {
+  const { address, balance } = useWallet();
   const [timeRange, setTimeRange] = useState("7d");
   const [amount, setAmount] = useState("");
   const [currency, setCurrency] = useState("USDC");
@@ -56,28 +58,31 @@ const Dashboard = () => {
 
   const metrics = [
     {
+      title: "钱包总资产",
+      value: `${balance} ETH`,
+      change: "+2.4%",
+      icon: DollarSign,
+      color: "text-green-600",
+      bgColor: "bg-green-100",
+      description: "当前钱包余额"
+    },
+    {
       title: "总交易额",
       value: "$12,847",
       change: "+18.2%",
-      icon: DollarSign,
-      color: "text-green-600",
-      bgColor: "bg-green-100"
+      icon: TrendingUp,
+      color: "text-blue-600",
+      bgColor: "bg-blue-100",
+      description: "累计支付收入"
     },
     {
       title: "成功支付",
       value: "234",
       change: "+12.5%",
-      icon: TrendingUp,
-      color: "text-blue-600",
-      bgColor: "bg-blue-100"
-    },
-    {
-      title: "活跃用户",
-      value: "89",
-      change: "+8.1%",
       icon: Users,
       color: "text-purple-600",
-      bgColor: "bg-purple-100"
+      bgColor: "bg-purple-100",
+      description: "成功交易次数"
     },
     {
       title: "平均确认时间",
@@ -85,7 +90,8 @@ const Dashboard = () => {
       change: "-0.4s",
       icon: Clock,
       color: "text-orange-600",
-      bgColor: "bg-orange-100"
+      bgColor: "bg-orange-100",
+      description: "交易确认速度"
     }
   ];
 
@@ -167,9 +173,16 @@ const Dashboard = () => {
           <h1 className="text-3xl font-bold text-foreground mb-4">
             支付控制台
           </h1>
-          <p className="text-lg text-muted-foreground">
-            管理您的 x402 支付集成和监控交易数据
-          </p>
+          <div className="flex items-center space-x-4">
+            <p className="text-lg text-muted-foreground">
+              管理您的 x402 支付集成和监控交易数据
+            </p>
+            {address && (
+              <Badge variant="outline" className="bg-green-primary/10 text-green-primary border-green-primary/30">
+                钱包: {address.slice(0, 6)}...{address.slice(-4)}
+              </Badge>
+            )}
+          </div>
         </div>
 
         {/* Metrics Cards */}
@@ -189,6 +202,9 @@ const Dashboard = () => {
                       </p>
                       <p className={`text-sm ${metric.color}`}>
                         {metric.change}
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {metric.description}
                       </p>
                     </div>
                     <div className={`w-12 h-12 ${metric.bgColor} rounded-lg flex items-center justify-center`}>
@@ -335,6 +351,19 @@ const Dashboard = () => {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                   />
+                </div>
+
+                <div className="space-y-2">
+                  <Label>接收地址</Label>
+                  <Input
+                    value={address || ""}
+                    disabled
+                    className="bg-muted text-muted-foreground"
+                    placeholder="请先连接钱包"
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    支付将发送到您连接的钱包地址
+                  </p>
                 </div>
 
                 <Button onClick={handleCreatePayment} className="x402-button w-full">
