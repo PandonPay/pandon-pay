@@ -5,6 +5,7 @@ import HeroSection from "@/components/HeroSection";
 import FeatureGrid from "@/components/FeatureGrid";
 import StatsSection from "@/components/StatsSection";
 import PaymentReceiver from "@/components/PaymentReceiver";
+import PricingSection from "@/components/PricingSection";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -103,32 +104,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* 修改 CTA 按钮 */}
-      {/* <div className="text-center py-16">
-        <Button
-          onClick={handleStartTrial}
-          disabled={isConnecting}
-          className="x402-button text-lg px-8 py-6"
-        >
-          {isConnecting ? (
-            <>
-              <div className="w-5 h-5 mr-2 animate-spin border-2 border-white border-t-transparent rounded-full" />
-              连接钱包中...
-            </>
-          ) : isConnected ? (
-            <>
-              进入控制台
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </>
-          ) : (
-            <>
-              <Zap className="w-5 h-5 mr-2" />
-              开始试用
-            </>
-          )}
-        </Button>
-      </div> */}
-
       {/* Features Section */}
       <FeatureGrid />
 
@@ -198,6 +173,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Pricing Section */}
+      <PricingSection />
 
       {/* Testimonials Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
