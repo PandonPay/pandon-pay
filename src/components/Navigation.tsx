@@ -45,7 +45,7 @@ const Navigation = () => {
   const navItems = [
     { href: "/", label: "首页", icon: Zap },
     { href: "/create", label: "创建支付", icon: CreditCard },
-    { href: "/receive", label: "接收支付", icon: Wallet },
+    // { href: "/receive", label: "接收支付", icon: Wallet },
     { href: "/docs", label: "开发文档", icon: Code },
     { href: "/dashboard", label: "控制台", icon: BarChart3 },
   ];
@@ -142,7 +142,7 @@ const Navigation = () => {
                     className="cursor-pointer"
                   >
                     <BarChart3 className="w-4 h-4 mr-2" />
-                    进入 Dashboard
+                    控制台
                   </DropdownMenuItem>
 
                   <DropdownMenuItem
