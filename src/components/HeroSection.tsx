@@ -38,10 +38,10 @@ const HeroSection = () => {
 
           {/* Main Heading */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6">
-            <span className="block">重新定义</span>
-            <span className="block gradient-green bg-clip-text text-transparent">
+            <span className="block">重新定义 Web3 支付</span>
+            {/* <span className="block gradient-green bg-clip-text text-transparent">
               Web3 支付
-            </span>
+            </span> */}
           </h1>
 
           {/* Subheading */}
