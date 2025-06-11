@@ -1,4 +1,3 @@
-
 import {
   Card,
   CardContent,
@@ -14,7 +13,7 @@ const PricingSection = () => {
   const plans = [
     {
       name: "免费版",
-      price: "¥0",
+      price: "$0",
       period: "/月",
       description: "适合个人开发者和小型项目",
       features: [
@@ -24,10 +23,7 @@ const PricingSection = () => {
         "标准 API 文档",
         "基础分析报告",
       ],
-      limitations: [
-        "单个钱包连接",
-        "标准确认速度",
-      ],
+      limitations: ["单个钱包连接", "标准确认速度"],
       buttonText: "免费开始",
       buttonVariant: "outline" as const,
       icon: Zap,
@@ -35,7 +31,7 @@ const PricingSection = () => {
     },
     {
       name: "专业版",
-      price: "¥299",
+      price: "$299",
       period: "/月",
       description: "适合成长型企业和专业团队",
       features: [
@@ -57,7 +53,7 @@ const PricingSection = () => {
     },
     {
       name: "企业版",
-      price: "¥999",
+      price: "$999",
       period: "/月",
       description: "适合大型企业和高频交易场景",
       features: [
@@ -99,7 +95,7 @@ const PricingSection = () => {
           {plans.map((plan, index) => {
             const Icon = plan.icon;
             const isPopular = plan.badge === "推荐";
-            
+
             return (
               <Card
                 key={index}
@@ -111,9 +107,7 @@ const PricingSection = () => {
               >
                 {plan.badge && (
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <Badge className={plan.badgeColor}>
-                      {plan.badge}
-                    </Badge>
+                    <Badge className={plan.badgeColor}>{plan.badge}</Badge>
                   </div>
                 )}
 
@@ -158,10 +152,12 @@ const PricingSection = () => {
                     {plan.features.map((feature, i) => (
                       <div key={i} className="flex items-start space-x-3">
                         <CheckCircle className="w-4 h-4 text-green-primary mt-0.5 flex-shrink-0" />
-                        <span className="text-sm text-foreground">{feature}</span>
+                        <span className="text-sm text-foreground">
+                          {feature}
+                        </span>
                       </div>
                     ))}
-                    
+
                     {plan.limitations.length > 0 && (
                       <>
                         <p className="text-sm font-medium text-muted-foreground mt-4">
