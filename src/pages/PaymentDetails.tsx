@@ -38,7 +38,7 @@ const PaymentDetails = () => {
     amount: "10.50",
     currency: "USDC",
     description: "API 访问许可证",
-    link: `https://pay.pandon.dev/x402/${linkId}`,
+    link: `https://pandon.pay/checkout/${linkId}`,
     network: "Base",
     created: "2小时前",
   });
@@ -103,7 +103,7 @@ const PaymentDetails = () => {
             <div className="w-12 h-12 gradient-green rounded-lg flex items-center justify-center mr-3">
               <Wallet className="w-6 h-6 text-white" />
             </div>
-            <h1 className="text-3xl font-bold text-green-primary">支付详情</h1>
+            <h1 className="text-3xl font-bold text-green-primary">结账支付</h1>
           </div>
           <p className="text-muted-foreground">
             基于 x402 协议的即时稳定币支付

@@ -8,6 +8,10 @@ import {
 import { Badge } from "@/components/ui/badge";
 import {
   Zap,
+  Forward,
+  Send,
+  FileText,
+  Route,
   Shield,
   Globe,
   Code,
@@ -21,7 +25,7 @@ import {
 const FeatureGrid = () => {
   const features = [
     {
-      icon: Zap,
+      icon: Route,
       title: "HTTP 原生支付",
       description: "基于 x402 协议，将支付直接嵌入到 HTTP 请求中，无需页面跳转",
       badge: "核心技术",

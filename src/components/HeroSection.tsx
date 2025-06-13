@@ -2,6 +2,9 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
   Zap,
+  Send,
+  Forward,
+  Route,
   ArrowRight,
   Shield,
   Globe,
@@ -23,7 +26,7 @@ const HeroSection = () => {
     navigate("/dashboard");
   };
   const features = [
-    { icon: Zap, text: "HTTP 原生支付" },
+    { icon: Route, text: "HTTP 原生支付" },
     { icon: Clock, text: "3秒内确认" },
     { icon: Shield, text: "链上安全" },
     { icon: Globe, text: "全球访问" },
@@ -47,7 +50,7 @@ const HeroSection = () => {
           <div className="inline-flex items-center space-x-2 bg-secondary/20 text-secondary-foreground px-4 py-2 rounded-full mb-6">
             <TrendingUp className="w-4 h-4" />
             <span className="text-sm font-medium">
-              基于 x402 协议的下一代支付
+              基于 x402 协议的下一代 Web3 支付
             </span>
             <Badge className="bg-secondary text-secondary-foreground">新</Badge>
           </div>

@@ -7,19 +7,19 @@ export function Footer() {
         <div className="grid md:grid-cols-5 gap-8">
           <div className="md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 gradient-green rounded-lg flex items-center justify-center">
+              {/* <div className="w-8 h-8 gradient-green rounded-lg flex items-center justify-center">
                 <Zap className="w-5 h-5 text-white" />
-              </div>
+              </div> */}
+              <img src="/logo.png" alt="Pandon Pay" className="w-8 h-8 mr-2" />
               <span className="text-xl font-bold text-green-primary">
                 Pandon Pay
               </span>
             </div>
             <p className="text-muted-foreground mb-4 max-w-md">
-              基于 x402 协议的下一代 Web3
-              支付基础设施，让每一次交易都如发送消息般简单。
+              基于 x402 协议的下一代 Web3 支付，让每一次交易都如发送消息般简单。
             </p>
             <div className="text-sm text-muted-foreground">
-              © 2024 Pandon Pay. All rights reserved.
+              © 2025 Pandon Pay. All rights reserved.
             </div>
           </div>
 
@@ -28,7 +28,9 @@ export function Footer() {
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li>
                 <a
-                  href="#"
+                  href="https://www.x402.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="hover:text-green-primary transition-colors duration-200"
                 >
                   x402 协议

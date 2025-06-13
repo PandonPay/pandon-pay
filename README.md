@@ -1,8 +1,6 @@
-# Welcome to your Lovable project
+# Pandon Pay
 
 ## Project info
-
-**URL**: https://lovable.dev/projects/938e36f0-e577-4a74-abaf-84ffa560c1eb
 
 ## How can I edit this code?
 

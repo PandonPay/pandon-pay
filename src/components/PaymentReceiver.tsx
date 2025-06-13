@@ -19,6 +19,9 @@ import {
   TrendingUp,
   Shield,
   Zap,
+  Send,
+  Forward,
+  Route,
   ArrowRight,
   ExternalLink,
 } from "lucide-react";
@@ -43,7 +46,7 @@ const PaymentReceiver = () => {
   };
 
   const paymentSteps = [
-    { title: "HTTP 402 响应", description: "服务器返回支付请求", icon: Zap },
+    { title: "HTTP 402 响应", description: "服务器返回支付请求", icon: Route },
     { title: "钱包连接", description: "连接 Web3 钱包", icon: Wallet },
     { title: "交易签名", description: "签署稳定币转账", icon: Shield },
     { title: "链上验证", description: "区块链确认交易", icon: CheckCircle },

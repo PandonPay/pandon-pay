@@ -52,7 +52,7 @@ const Dashboard = () => {
       id: "link_1",
       amount: "25.00 USDC",
       description: "API 访问许可证",
-      link: "https://pay.pandon.dev/x402/abc123",
+      link: "https://pandon.pay/checkout/abc123",
       status: "active",
       created: "2小时前",
     },
@@ -60,7 +60,7 @@ const Dashboard = () => {
       id: "link_2",
       amount: "10.50 USDC",
       description: "Premium 订阅",
-      link: "https://pay.pandon.dev/x402/def456",
+      link: "https://pandon.pay/checkout/def456",
       status: "active",
       created: "1天前",
     },
@@ -157,7 +157,7 @@ const Dashboard = () => {
       id: `link_${Date.now()}`,
       amount: `${amount} ${currency}`,
       description: description || "支付链接",
-      link: `https://pay.pandon.dev/x402/${Math.random().toString(36).substring(2, 15)}`,
+      link: `https://pandon.pay/checkout/${Math.random().toString(36).substring(2, 15)}`,
       status: "active",
       created: "刚刚",
     };
@@ -181,7 +181,7 @@ const Dashboard = () => {
   };
 
   const viewPaymentDetails = (linkId: string) => {
-    navigate(`/receive/${linkId}`);
+    navigate(`/checkout/${linkId}`);
   };
 
   return (
@@ -382,7 +382,7 @@ const Dashboard = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="description">支付描述</Label>
+                  <Label htmlFor="description">支付信息</Label>
                   <Input
                     id="description"
                     placeholder="API 访问许可证 - 1个月"
@@ -400,7 +400,7 @@ const Dashboard = () => {
                     placeholder="请先连接钱包"
                   />
                   <p className="text-xs text-muted-foreground">
-                    支付将发送到您连接的钱包地址
+                    资金将发送到您连接的钱包地址
                   </p>
                 </div>
 

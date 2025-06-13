@@ -83,7 +83,7 @@ const CreatePayment = () => {
     // Simulate API call
     setTimeout(() => {
       const linkId = Math.random().toString(36).substring(2, 15);
-      const link = `https://pay.pandon.dev/x402/${linkId}`;
+      const link = `https://pandon.pay/checkout/${linkId}`;
       setGeneratedLink(link);
       setIsGenerating(false);
 
@@ -196,7 +196,7 @@ const CreatePayment = () => {
                 </Select>
               </div>
 
-              {/* Receive Address */}
+              {/* Checkout Address */}
               <div className="space-y-2">
                 <Label>接收地址 *</Label>
                 <Input
@@ -206,7 +206,7 @@ const CreatePayment = () => {
                   placeholder="请先连接钱包"
                 />
                 <p className="text-xs text-muted-foreground">
-                  支付将发送到您连接的钱包地址，此地址不可修改
+                  资金将发送到您连接的钱包地址
                 </p>
               </div>
 
@@ -214,7 +214,7 @@ const CreatePayment = () => {
               <div className="space-y-2">
                 <Label htmlFor="description">
                   <Clock className="w-4 h-4 mr-1 inline" />
-                  支付描述
+                  支付信息
                 </Label>
                 <Input
                   id="description"

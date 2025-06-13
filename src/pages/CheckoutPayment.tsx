@@ -23,7 +23,7 @@ import {
 } from "lucide-react";
 import { Footer } from "@/components/Footer";
 
-const ReceivePayment = () => {
+const CheckoutPayment = () => {
   const [paymentStatus, setPaymentStatus] = useState<
     "pending" | "processing" | "completed" | "failed"
   >("pending");
@@ -68,7 +68,7 @@ const ReceivePayment = () => {
     }
   };
 
-  const mockPaymentLink = "https://pandon.pay/p/abc123";
+  const mockPaymentLink = "https://pandon.pay/checkout/abc123";
   const mockTxHash = "0x1234...5678";
 
   return (
@@ -82,7 +82,7 @@ const ReceivePayment = () => {
             <div className="w-12 h-12 gradient-green rounded-lg flex items-center justify-center mr-3">
               <Wallet className="w-6 h-6 text-white" />
             </div>
-            <h1 className="text-3xl font-bold text-green-primary">接收支付</h1>
+            <h1 className="text-3xl font-bold text-green-primary">结账支付</h1>
           </div>
           <p className="text-muted-foreground">
             基于 x402 协议的即时稳定币支付
@@ -93,7 +93,7 @@ const ReceivePayment = () => {
         <Card className="x402-card mb-6">
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
-              <span>支付详情</span>
+              <span>支付信息</span>
               <Badge variant="secondary" className="bg-secondary/20">
                 x402 协议
               </Badge>
@@ -222,4 +222,4 @@ const ReceivePayment = () => {
   );
 };
 
-export default ReceivePayment;
+export default CheckoutPayment;

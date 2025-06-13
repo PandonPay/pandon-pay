@@ -15,6 +15,7 @@ import {
   Zap,
   Menu,
   X,
+  House,
   Code,
   CreditCard,
   BarChart3,
@@ -43,9 +44,9 @@ const Navigation = () => {
   const location = useLocation();
 
   const navItems = [
-    { href: "/", label: "首页", icon: Zap },
+    { href: "/", label: "首页", icon: House },
     { href: "/create", label: "创建支付", icon: CreditCard },
-    // { href: "/receive", label: "接收支付", icon: Wallet },
+    // { href: "/checkout", label: "结账支付", icon: Wallet },
     { href: "/docs", label: "开发文档", icon: Code },
     { href: "/dashboard", label: "控制台", icon: BarChart3 },
   ];
@@ -60,9 +61,10 @@ const Navigation = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 gradient-green rounded-lg flex items-center justify-center">
+            {/* <div className="w-8 h-8 gradient-green rounded-lg flex items-center justify-center">
               <Zap className="w-5 h-5 text-white" />
-            </div>
+            </div> */}
+            <img src="/logo.png" alt="Pandon Pay" className="w-8 h-8 mr-2" />
             <span className="text-xl font-bold text-green-primary">
               Pandon Pay
             </span>

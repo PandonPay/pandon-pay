@@ -145,7 +145,7 @@ async function purchaseGPU() {
     {
       step: "2",
       title: "获取 API Key",
-      command: "curl -X POST https://api.pandon.dev/auth/register",
+      command: "curl -X POST https://api.pandon.pay/auth/register",
       description: "注册并获取您的 API 密钥",
     },
     {
