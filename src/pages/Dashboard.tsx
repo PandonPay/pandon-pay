@@ -31,6 +31,11 @@ import {
   Plus,
   Eye,
   Copy,
+  Shield,
+  CreditCard,
+  QrCode,
+  Check,
+  Link as LinkIcon,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
@@ -39,10 +44,12 @@ import Navigation from "@/components/Navigation";
 import DeveloperConsole from "@/components/DeveloperConsole";
 import StatsSection from "@/components/StatsSection";
 import { Footer } from "@/components/Footer";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 const Dashboard = () => {
   const { address, balance } = useWallet();
   const [timeRange, setTimeRange] = useState("7d");
+  const [expiryDays, setExpiryDays] = useState("7");
   const [amount, setAmount] = useState("");
   const [currency, setCurrency] = useState("USDC");
   const [network, setNetwork] = useState("base");
@@ -68,6 +75,17 @@ const Dashboard = () => {
 
   const navigate = useNavigate();
   const { toast } = useToast();
+
+  const currencies = [
+    { value: "USDC", label: "USDC", icon: "💵" },
+    { value: "USDT", label: "USDT", icon: "💰" },
+  ];
+
+  const networks = [
+    { value: "base", label: "Base (推荐)", fee: "0.001 USDC", speed: "2-3秒" },
+    { value: "polygon", label: "Polygon", fee: "0.002 USDC", speed: "3-5秒" },
+    { value: "ethereum", label: "Ethereum", fee: "2-5 USDC", speed: "30-60秒" },
+  ];
 
   const metrics = [
     {
@@ -184,6 +202,9 @@ const Dashboard = () => {
     // 在新标签页中打开支付详情页面
     window.open(`/checkout/${linkId}`, "_blank");
   };
+
+  const estimatedFee =
+    networks.find((n) => n.value === network)?.fee || "0.001 USDC";
 
   return (
     <div className="min-h-screen bg-background">
@@ -342,68 +363,93 @@ const Dashboard = () => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label>稳定币类型</Label>
+                    <Label>稳定币类型 *</Label>
                     <Select value={currency} onValueChange={setCurrency}>
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
+                      <SelectContent>
+                        {currencies.map((curr) => (
+                          <SelectItem key={curr.value} value={curr.value}>
+                            <div className="flex items-center space-x-2">
+                              <span>{curr.icon}</span>
+                              <span>{curr.label}</span>
+                            </div>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
                     </Select>
                   </div>
                 </div>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label>链接有效期</Label>
-                    <Select>
+                    <Label>区块链网络 *</Label>
+                    <Select value={network} onValueChange={setNetwork}>
                       <SelectTrigger>
-                        <SelectValue placeholder="选择有效期" />
+                        <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="1h">1小时</SelectItem>
-                        <SelectItem value="24h">24小时</SelectItem>
-                        <SelectItem value="7d">7天</SelectItem>
-                        <SelectItem value="30d">30天</SelectItem>
-                        <SelectItem value="never">永久有效</SelectItem>
+                        <SelectItem value="base">Base (推荐)</SelectItem>
+                        <SelectItem value="polygon">Polygon</SelectItem>
+                        <SelectItem value="ethereum">Ethereum</SelectItem>
                       </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <Label>接收地址 *</Label>
+                    <Input
+                      value={address || ""}
+                      disabled
+                      className="bg-muted text-muted-foreground"
+                      placeholder="请先连接钱包"
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      资金将发送到您连接的钱包地址
+                    </p>
+                  </div>
+                </div>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="description">支付信息</Label>
+                    <Input
+                      id="description"
+                      placeholder="API 访问许可证 - 1个月"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label>链接有效期</Label>
+                    <Select value={expiryDays} onValueChange={setExpiryDays}>
+                      <Select>
+                        <SelectTrigger>
+                          <SelectValue placeholder="选择有效期" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="1h">1小时</SelectItem>
+                          <SelectItem value="24h">24小时</SelectItem>
+                          <SelectItem value="7d">7天</SelectItem>
+                          <SelectItem value="30d">30天</SelectItem>
+                          <SelectItem value="never">永久有效</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </Select>
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <Label>区块链网络</Label>
-                  <Select value={network} onValueChange={setNetwork}>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="base">Base (推荐)</SelectItem>
-                      <SelectItem value="polygon">Polygon</SelectItem>
-                      <SelectItem value="ethereum">Ethereum</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="description">支付信息</Label>
-                  <Input
-                    id="description"
-                    placeholder="API 访问许可证 - 1个月"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label>接收地址</Label>
-                  <Input
-                    value={address || ""}
-                    disabled
-                    className="bg-muted text-muted-foreground"
-                    placeholder="请先连接钱包"
-                  />
-                  <p className="text-xs text-muted-foreground">
-                    资金将发送到您连接的钱包地址
-                  </p>
-                </div>
+                {/* Fee Estimation */}
+                <Alert className="border-green-primary/30 bg-accent">
+                  <Shield className="h-4 w-4 text-green-primary" />
+                  <AlertDescription>
+                    <div className="flex justify-between items-center">
+                      <span>预估手续费: {estimatedFee}</span>
+                      <Badge className="bg-green-primary/20 text-green-primary">
+                        低费用
+                      </Badge>
+                    </div>
+                  </AlertDescription>
+                </Alert>
 
                 <Button
                   onClick={handleCreatePayment}

@@ -228,15 +228,18 @@ const CreatePayment = () => {
               <div className="space-y-2">
                 <Label>链接有效期</Label>
                 <Select value={expiryDays} onValueChange={setExpiryDays}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="1">1 天</SelectItem>
-                    <SelectItem value="7">7 天</SelectItem>
-                    <SelectItem value="30">30 天</SelectItem>
-                    <SelectItem value="90">90 天</SelectItem>
-                  </SelectContent>
+                  <Select>
+                    <SelectTrigger>
+                      <SelectValue placeholder="选择有效期" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="1h">1小时</SelectItem>
+                      <SelectItem value="24h">24小时</SelectItem>
+                      <SelectItem value="7d">7天</SelectItem>
+                      <SelectItem value="30d">30天</SelectItem>
+                      <SelectItem value="never">永久有效</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </Select>
               </div>
 
