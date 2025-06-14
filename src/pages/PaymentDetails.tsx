@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -84,18 +84,18 @@ const PaymentDetails = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navigation />
+      {/* <Navigation /> */}
 
       <div className="container mx-auto px-4 py-8 max-w-2xl">
         {/* 返回按钮 */}
-        <Button
+        {/* <Button
           variant="outline"
           onClick={() => navigate("/dashboard")}
           className="mb-6"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           返回控制台
-        </Button>
+        </Button> */}
 
         {/* 页面标题 */}
         <div className="text-center mb-8">
@@ -116,9 +116,22 @@ const PaymentDetails = () => {
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
               <span>支付信息</span>
-              <Badge variant="secondary" className="bg-secondary/20">
+              {/* <Badge variant="secondary" className="bg-secondary/20">
                 x402 协议
-              </Badge>
+              </Badge> */}
+              <Link to="/" className="flex items-center space-x-2">
+                <img
+                  src="/logo.png"
+                  alt="Pandon Pay"
+                  className="w-5 h-5 mr-0"
+                />
+                <span className="text-xs font-bold text-green-primary tracking-wide">
+                  Pandon Pay
+                </span>
+                {/* <Badge className="bg-secondary/20 text-secondary-foreground text-[10px]">
+                  x402
+                </Badge> */}
+              </Link>
             </CardTitle>
             <CardDescription>{paymentData.description}</CardDescription>
           </CardHeader>
@@ -250,7 +263,7 @@ const PaymentDetails = () => {
         </div>
       </div>
       {/* Footer */}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

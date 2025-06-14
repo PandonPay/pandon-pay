@@ -1,4 +1,5 @@
 import { Zap } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 export function Footer() {
   return (
@@ -10,10 +11,13 @@ export function Footer() {
               {/* <div className="w-8 h-8 gradient-green rounded-lg flex items-center justify-center">
                 <Zap className="w-5 h-5 text-white" />
               </div> */}
-              <img src="/logo.png" alt="Pandon Pay" className="w-8 h-8 mr-2" />
+              <img src="/logo.png" alt="Pandon Pay" className="w-8 h-8 mr-1" />
               <span className="text-xl font-bold text-green-primary">
                 Pandon Pay
               </span>
+              <Badge className="bg-secondary/20 text-secondary-foreground text-[10px]">
+                x402
+              </Badge>
             </div>
             <p className="text-muted-foreground mb-4 max-w-md">
               基于 x402 协议的下一代 Web3 支付，让每一次交易都如发送消息般简单。

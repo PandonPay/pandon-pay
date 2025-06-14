@@ -181,7 +181,8 @@ const Dashboard = () => {
   };
 
   const viewPaymentDetails = (linkId: string) => {
-    navigate(`/checkout/${linkId}`);
+    // 在新标签页中打开支付详情页面
+    window.open(`/checkout/${linkId}`, "_blank");
   };
 
   return (
